@@ -1,7 +1,6 @@
 # anilist
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/icco/anilist.svg)](https://pkg.go.dev/github.com/icco/anilist)
-[![Go Report Card](https://goreportcard.com/badge/github.com/icco/anilist)](https://goreportcard.com/report/github.com/icco/anilist)
 [![Test Go](https://github.com/icco/anilist/actions/workflows/test.yml/badge.svg)](https://github.com/icco/anilist/actions/workflows/test.yml)
 
 A minimal Go client for the [AniList](https://anilist.co) GraphQL API: reads a user's public anime list and their scores, normalized to a 0–10 scale.
