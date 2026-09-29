@@ -1,6 +1,6 @@
 # anilist
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/icco/anilist.svg)](https://pkg.go.dev/github.com/icco/anilist)
+[![Go Reference](https://pkg.go.dev/badge/go.icco.me/anilist.svg)](https://pkg.go.dev/go.icco.me/anilist)
 [![Test Go](https://github.com/icco/anilist/actions/workflows/test.yml/badge.svg)](https://github.com/icco/anilist/actions/workflows/test.yml)
 
 A minimal Go client for the [AniList](https://anilist.co) GraphQL API: reads a user's public anime list and their scores, normalized to a 0–10 scale.
@@ -8,7 +8,7 @@ A minimal Go client for the [AniList](https://anilist.co) GraphQL API: reads a u
 No API key, no OAuth, no registration. AniList serves public lists to anonymous callers.
 
 ```
-go get github.com/icco/anilist
+go get go.icco.me/anilist
 ```
 
 ## Usage
