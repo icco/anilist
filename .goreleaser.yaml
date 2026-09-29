@@ -25,6 +25,6 @@ release:
   mode: replace
   footer: |
     ---
-    Install with `go get github.com/icco/anilist@{{ .Tag }}`.
+    Install with `go get go.icco.me/anilist@{{ .Tag }}`.
 
     **Full Changelog**: https://github.com/icco/anilist/compare/{{ .PreviousTag }}...{{ .Tag }}
