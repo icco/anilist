@@ -27,18 +27,19 @@ func NewClient() *Client {
 
 // Entry is one rated anime from a user's list, score normalized to 0..10.
 type Entry struct {
-	ID    int    // AniList media id
-	URL   string // anilist.co page for the anime
-	Title string
-	Year  int
-	Score float64
+	ID     int    // AniList media id
+	URL    string // anilist.co page for the anime
+	Title  string
+	Year   int
+	Score  float64
+	Format string // MediaFormat: TV, TV_SHORT, MOVIE, SPECIAL, OVA, ONA, or MUSIC
 }
 
 const listQuery = `query($u:String){
   User(name:$u){ mediaListOptions { scoreFormat } }
   MediaListCollection(userName:$u, type:ANIME){ lists { entries {
     score
-    media { id siteUrl seasonYear title { romaji english } }
+    media { id siteUrl format seasonYear title { romaji english } }
   } } }
 }`
 
@@ -83,6 +84,7 @@ func (c *Client) List(ctx context.Context, username string) ([]Entry, error) {
 						Media struct {
 							ID         int    `json:"id"`
 							SiteURL    string `json:"siteUrl"`
+							Format     string `json:"format"`
 							SeasonYear int    `json:"seasonYear"`
 							Title      struct {
 								Romaji  string `json:"romaji"`
@@ -113,11 +115,12 @@ func (c *Client) List(ctx context.Context, username string) ([]Entry, error) {
 				continue
 			}
 			entries = append(entries, Entry{
-				ID:    e.Media.ID,
-				URL:   e.Media.SiteURL,
-				Title: title,
-				Year:  e.Media.SeasonYear,
-				Score: normalizeScore(e.Score, format),
+				ID:     e.Media.ID,
+				URL:    e.Media.SiteURL,
+				Format: e.Media.Format,
+				Title:  title,
+				Year:   e.Media.SeasonYear,
+				Score:  normalizeScore(e.Score, format),
 			})
 		}
 	}
