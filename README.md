@@ -30,6 +30,7 @@ for _, e := range entries {
 - **Scores are normalized to 0–10.** Each AniList user picks their own score format — `POINT_100`, `POINT_10`, `POINT_10_DECIMAL`, `POINT_5`, or `POINT_3` — so the same raw number means different things on different accounts. `List` reads the account's `scoreFormat` in the same query and rescales, which is the whole reason this package exists rather than a raw GraphQL call. An unrecognized format is passed through unchanged.
 - **Only rated entries come back.** Entries with a score of 0 (AniList's "unrated") are dropped, as are entries with no title in either language.
 - **Titles prefer English, falling back to romaji.** Many titles have only one.
+- **Each entry carries the AniList media `ID` and its `URL`** (`https://anilist.co/anime/<id>`).
 - **The user's lists are flattened.** AniList splits a library into named lists (Watching, Completed, Dropped, ...); `List` returns entries from all of them, without saying which list an entry came from.
 - **An unknown username is not an error.** AniList answers with HTTP 200 and a null user, so you get an empty slice.
 - **Anime only, read only.** No manga, no mutations, no auth. `MediaListCollection` is queried with `type: ANIME`. PRs welcome.
