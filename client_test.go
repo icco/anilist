@@ -57,17 +57,17 @@ func TestListNormalizesScoresAndPicksTitle(t *testing.T) {
 	}
 }
 
-func TestListReturnsIDAndURL(t *testing.T) {
+func TestListReturnsIDURLAndFormat(t *testing.T) {
 	t.Parallel()
 	srv := serve(t, listResponse("POINT_10", `
-		{"score":8,"media":{"id":101922,"siteUrl":"https://anilist.co/anime/101922","seasonYear":2019,"title":{"romaji":"Kimetsu no Yaiba","english":"Demon Slayer"}}}`))
+		{"score":8,"media":{"id":101922,"siteUrl":"https://anilist.co/anime/101922","format":"TV","seasonYear":2019,"title":{"romaji":"Kimetsu no Yaiba","english":"Demon Slayer"}}}`))
 
 	entries, err := newTestClient(srv).List(t.Context(), "nat")
 	if err != nil {
 		t.Fatalf("List: %v", err)
 	}
-	if len(entries) != 1 || entries[0].ID != 101922 || entries[0].URL != "https://anilist.co/anime/101922" {
-		t.Errorf("entries = %+v, want ID 101922 and its siteUrl", entries)
+	if len(entries) != 1 || entries[0].ID != 101922 || entries[0].URL != "https://anilist.co/anime/101922" || entries[0].Format != "TV" {
+		t.Errorf("entries = %+v, want ID 101922, its siteUrl, and format TV", entries)
 	}
 }
 
